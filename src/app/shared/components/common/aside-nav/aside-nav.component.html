@@ -1,0 +1,32 @@
+<div class="aside-nav">
+  <ul class="aside-nav__list">
+    <li class="aside-nav__item">
+      <a routerLink="/home" (click)="changeSublistIndex(0)" class="aside-nav__link">
+        <fa-icon [icon]="faHome" class="aside-nav__icon aside-nav__icon--large"></fa-icon>
+        Strona główna
+      </a>
+    </li>
+    <li class="aside-nav__item">
+      <a routerLink="quizzes/list/category" (click)="changeSublistIndex(1)" class="aside-nav__link" [queryParams]="{collectionName: 'exampleQuizzes'}">
+        <fa-icon [icon]="faStickyNote" class="aside-nav__icon"></fa-icon>
+        Quizy
+      </a>
+      <ul *ngIf="sublistIndex && sublistIndex == 1" class="aside-nav__list aside-nav__list--with-margin">
+        <a routerLink="/quizzes/list/category" [queryParams]="{collectionName: 'exampleQuizzes'}" class="aside-nav__sublink">Przykładowe quizy</a>
+        <a routerLink="/quizzes/list/category" [queryParams]="{collectionName: 'usersQuizzes'}" class="aside-nav__sublink">Quizy użytkowników</a>
+        <a routerLink="/quizzes/create" class="aside-nav__sublink">Utwórz quiz</a>
+      </ul>
+    </li>
+    <li class="aside-nav__item">
+      <a routerLink="/account/login" (click)="changeSublistIndex(2)" class="aside-nav__link">
+        <fa-icon [icon]="faUser" class="aside-nav__icon"></fa-icon>
+        Zaloguj/Zarejestruj
+      </a>
+      <ul *ngIf="sublistIndex && sublistIndex == 2" class="aside-nav__list aside-nav__list--with-margin">
+        <a routerLink="/dashboard/list" class="aside-nav__sublink">Pulpit użytkownika</a>
+        <a routerLink="/account/login" class="aside-nav__sublink">Zaloguj</a>
+        <a routerLink="/account/register" class="aside-nav__sublink">Zarejestruj</a>
+      </ul>
+    </li>
+  </ul>
+</div>

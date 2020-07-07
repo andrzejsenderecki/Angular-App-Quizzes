@@ -1,0 +1,41 @@
+<div class="mobile-nav">
+  <div class="mobile-nav__top">
+    <app-logo></app-logo>
+    <button (click)="displayNav()" class="mobile-nav__button" [ngClass]="{'mobile-nav__button--active': !hideNav}">
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
+  </div>
+  <div class="container container--vertical-center">
+    <nav class="mobile-nav" [ngClass]="{'mobile-nav--hide': hideNav}">
+      <ul class="mobile-nav__list">
+        <li class="mobile-nav__item">
+          <a routerLink="/home" (click)="displayNav()" class="mobile-nav__link">
+            <fa-icon [icon]="faHome" class="mobile-nav__icon main-nav__icon--large"></fa-icon>
+            Strona główna</a>
+        </li>
+        <li class="mobile-nav__item">
+          <a routerLink="quizzes/list/category" (click)="displaySublist(1)" [queryParams]="{collectionName: 'exampleQuizzes'}" class="mobile-nav__link">
+            <fa-icon [icon]="faStickyNote" class="mobile-nav__icon"></fa-icon>
+            Quizy</a>
+          <ul *ngIf="sublistIndex && sublistIndex == 1" class="mobile-nav__list">
+            <a routerLink="/quizzes/list/category" (click)="displayNav()" [queryParams]="{collectionName: 'exampleQuizzes'}" class="mobile-nav__sublink">Przykładowe quizy</a>
+            <a routerLink="/quizzes/list/category" (click)="displayNav()" [queryParams]="{collectionName: 'usersQuizzes'}" class="mobile-nav__sublink">Quizy użytkowników</a>
+            <a routerLink="/quizzes/create" (click)="displayNav()" class="mobile-nav__sublink">Utwórz quiz</a>
+          </ul>
+        </li>
+        <li class="mobile-nav__item">
+          <a routerLink="/account/login" (click)="displaySublist(2)" class="mobile-nav__link">
+            <fa-icon [icon]="faUser" class="mobile-nav__icon"></fa-icon>
+            Pulpit użytkownika</a>
+          <ul *ngIf="sublistIndex && sublistIndex == 2" class="mobile-nav__list">
+            <a routerLink="/dashboard" (click)="displayNav()" [queryParams]="{collectionName: 'exampleQuizzes'}" class="mobile-nav__sublink">Pulpit użytkownika</a>
+            <a routerLink="/account/register" (click)="displayNav()" [queryParams]="{collectionName: 'usersQuizzes'}" class="mobile-nav__sublink">Zaloguj</a>
+            <a routerLink="/account/login" (click)="displayNav()" class="mobile-nav__sublink">Zarejestruj</a>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

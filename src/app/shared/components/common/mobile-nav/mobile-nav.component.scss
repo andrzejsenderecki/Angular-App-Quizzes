@@ -1,0 +1,95 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $dark;
+  padding-bottom: 20px;
+
+  &--hide {
+    display: none;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 20px 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding-top: 20px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+  }
+
+  &__link {
+    font-size: 2em;
+    font-weight: 400;
+    color: $medium-bright;
+    text-decoration: none;
+  }
+
+  &__sublink {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: $accent;
+    text-decoration: none;
+    margin: 10px;
+  }
+
+  &__icon {
+    font-size: 1.5em;
+    margin-right: 5px;
+    color: $accent;
+
+    &--large {
+      font-size: 1.7em;
+    }
+  }
+
+  &__button {
+    background: none;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+
+    div {
+      width: 40px;
+      height: 6px;
+      background: $medium-bright;
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    &--active {
+      div:first-of-type {
+        transform: translateY(4px) rotate(45deg);
+      }
+
+      div:nth-of-type(2) {
+        display: none;
+      }
+
+      div:last-of-type {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host {
+    display: none;
+  }
+}

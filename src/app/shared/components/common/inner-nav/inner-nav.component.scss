@@ -1,0 +1,40 @@
+@import '../../../../../assets/scss/variables.scss';
+
+:host ::ng-deep .inner-nav__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+
+:host ::ng-deep .inner-nav__link {
+  color: $accent;
+  font-size: 1.5em;
+  text-decoration: none;
+  border-radius: 3px;
+  margin: 15px 0;
+  font-weight: 400;
+}
+
+.inner-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 0 0 20px 0;
+}
+
+@media screen and (min-width: 768px) {
+  :host ::ng-deep .inner-nav__link {
+    font-size: 1.3em;
+    margin: 0 0 0 5px;
+    cursor: pointer;
+  }
+
+  .inner-nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+  }
+}

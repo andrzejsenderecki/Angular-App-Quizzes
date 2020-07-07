@@ -1,0 +1,18 @@
+<div class="component-top">
+    <app-main-title title="Quizy"></app-main-title>
+    <app-inner-nav>
+      <li class="inner-nav__item">
+        <a routerLink="/quizzes/list/category" [queryParams]="{collectionName: 'exampleQuizzes'}" class="inner-nav__link">Przykładowe quizy</a>
+      </li>
+      <li class="inner-nav__item">
+        <a routerLink="/quizzes/list/category" [queryParams]="{collectionName: 'usersQuizzes'}" class="inner-nav__link">Quizy użytkowników</a>
+      </li>
+      <li class="inner-nav__item">
+        <a routerLink="/quizzes/create" class="inner-nav__link">Utwórz quiz</a>
+      </li>
+    </app-inner-nav>
+</div>
+<div class="component-content">
+
+  <router-outlet></router-outlet>
+</div>

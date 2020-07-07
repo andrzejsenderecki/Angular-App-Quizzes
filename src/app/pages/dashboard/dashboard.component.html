@@ -1,0 +1,17 @@
+<div class="component-top">
+    <app-main-title title="Pulpit użytkownika"></app-main-title>
+    <app-inner-nav>
+      <li class="inner-nav__item">
+        <a class="inner-nav__link" routerLink="/dashboard/create">Utwórz nowy quiz</a>
+      </li>
+      <li class="inner-nav__item">
+        <a class="inner-nav__link" routerLink="/dashboard/list">Lista quizów użytkownika</a>
+      </li>
+      <li class="inner-nav__item">
+        <a class="inner-nav__link" (click)="logout()">Wyloguj</a>
+      </li>
+    </app-inner-nav>
+</div>
+<div class="component-content">
+  <router-outlet></router-outlet>
+</div>

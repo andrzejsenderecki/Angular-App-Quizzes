@@ -1,0 +1,21 @@
+<div class="main-nav">
+  <div class="container container--vertical-center">
+    <app-logo></app-logo>
+    <nav>
+      <ul class="main-nav__list">
+        <a routerLink="/home" class="main-nav__item">
+          <fa-icon [icon]="faHome" class="main-nav__icon main-nav__icon--large"></fa-icon>
+          Strona główna
+        </a>
+        <a routerLink="/quizzes/list/category" (click)="changeSublistIndex(1)" [queryParams]="{collectionName: 'exampleQuizzes'}" class="main-nav__item">
+          <fa-icon [icon]="faStickyNote" class="main-nav__icon"></fa-icon>
+          Quizy
+        </a>
+        <a routerLink="/account/login" (click)="changeSublistIndex(2)" class="main-nav__item">
+          <fa-icon [icon]="faUser" class="main-nav__icon"></fa-icon>
+          Konto użytkownika
+        </a>
+      </ul>
+    </nav>
+  </div>
+</div>

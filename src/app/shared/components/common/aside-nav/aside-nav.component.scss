@@ -1,0 +1,59 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.aside-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: $dark;
+  height: 100%;
+  padding: 40px 0;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+
+    &--with-margin {
+      margin-top: 10px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: $medium-bright;
+    text-decoration: none;
+
+    &--active {
+      color: $accent;
+    }
+  }
+
+  &__sublink {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: $accent;
+    text-decoration: none;
+    margin: 5px 20px;
+  }
+
+  &__icon {
+    font-size: 1.3em;
+    margin-right: 10px;
+    color: $accent;
+
+    &--large {
+      font-size: 1.4em;
+    }
+  }
+}

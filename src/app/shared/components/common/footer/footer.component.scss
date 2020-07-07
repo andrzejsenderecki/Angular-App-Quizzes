@@ -1,0 +1,21 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: $dark;
+
+  &__text {
+    font-size: 1.3em;
+    color: $medium-bright;
+    font-weight: 400;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    height: 80px;
+  }
+}

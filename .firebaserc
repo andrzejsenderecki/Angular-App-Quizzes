@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "quizzesapp-72964": {
+      "hosting": {
+        "quizzes-app": [
+          "quizzesapp-72964"
+        ]
+      }
+    }
+  }
+}

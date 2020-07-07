@@ -1,0 +1,39 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.logo {
+  position: relative;
+  margin: 0 1em;
+
+  &__text {
+    color: $bright;
+    font-weight: 600;
+    font-size: 2em;
+
+    &--large {
+      font-size: 3em;
+      // color: $medium-dark;
+    }
+
+    &::first-letter {
+      font-size: 2.3em;
+      font-weight: 900;
+      color: $accent;
+    }
+  }
+
+  &__icon {
+    // display: none;
+    position: absolute;
+    top: 16px;
+    left: 13px;
+    color: $bright;
+    font-size: 1.5em;
+
+    &--large {
+      top: 23px;
+      left: 18px;
+      font-size: 2.5em;
+      // color: $medium-dark;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<div class="quiz-details" *ngIf="quiz">
+  <div *ngFor="let question of quiz.questions | keyvalue, let i = index">
+    <app-question-form
+      [answers]="getAnswers()"
+      [activeQuestion]="i"
+      (selectedAnswer)="changeAnswer($event)"
+      *ngIf="activeQuestion === i"
+      [question]="question">
+    </app-question-form>
+  </div>
+  <div class="quiz-details__buttons">
+    <button class="button-with-arrow" (click)="changeActiveQuestion('prev')">
+      <div class="button-with-arrow__arrow"></div>
+    </button>
+    <button class="button-with-arrow" (click)="changeActiveQuestion('next')">
+        <div class="button-with-arrow__arrow button-with-arrow__arrow--right"></div>
+    </button>
+  </div>
+  <div class="quiz-details__info-container">
+    <p class="quiz-details__info-text">Pytanie {{ activeQuestion + 1 }} z {{ quiz.questions.length }}</p>
+    <app-quiz-timer *ngIf="quizOnTime" (timeValueChange)="quizTimeValueChange($event)" [quizTime]="quiz.config.timeInSeconds"></app-quiz-timer>
+    <a class="button" [routerLink]="['/quizzes/quiz/result/', quizId]">Zakończ Quiz</a>
+  </div>
+</div>

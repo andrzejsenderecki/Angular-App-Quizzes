@@ -1,0 +1,9 @@
+<app-main-title title="Wynik quizu" type="special"></app-main-title>
+<div class="quiz-result">
+  <p *ngIf="numberAnswersNeededToPass" class="quiz-result__info">Ilość dobrych odpowiedzi: <span class="quiz-result__info--value">{{ quizResult.numberGoodAnswers }}</span></p>
+  <p *ngIf="numberAnswersNeededToPass" class="quiz-result__info">Ilość błędnych odpowiedzi: <span class="quiz-result__info--value">{{ quizResult.numberWrongAnswers }}</span></p>
+  <p *ngIf="numberAnswersNeededToPass" class="quiz-result__info">Ilość odpowiedzi potrzebnych do zaliczenia testu: <span class="quiz-result__info--value">{{ numberAnswersNeededToPass }}</span></p>
+  <div *ngIf="quizResult.result; then quizPassed else quizFailed"></div>
+  <ng-template #quizPassed><p class="quiz-result__result">Test Zaliczony. Brawo!</p></ng-template>
+  <ng-template #quizFailed class="quiz-result__result"><p class="quiz-result__result">Test niezaliczony. Spróbuj ponownie za jakiś czas.</p></ng-template>
+</div>
