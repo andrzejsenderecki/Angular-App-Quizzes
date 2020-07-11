@@ -29,7 +29,7 @@ export class QuizCreateUpdateService {
       this.setConditionalValidators();
     }
 
-  createNewQuizForm() {
+  createNewQuizForm(): FormGroup {
     return this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
       config: this.formBuilder.group({
@@ -46,7 +46,7 @@ export class QuizCreateUpdateService {
     });
   }
 
-  editQuiz() {
+  editQuiz(): void {
     this.route.params.subscribe(params => {
       this._quizId = params.id;
     });
@@ -153,7 +153,7 @@ export class QuizCreateUpdateService {
     });
   }
 
-  get amountAnswers() {
+  get amountAnswers(): number {
     return this._amountAnswers;
   }
 
@@ -161,43 +161,39 @@ export class QuizCreateUpdateService {
     this._amountAnswers = value;
   }
 
-  get correctAnswer() {
+  get correctAnswer(): Array<string> {
     return this._correctAnswer;
   }
 
-  get formIsBuild() {
+  get formIsBuild(): boolean {
     return this._formIsBuild;
   }
 
-  get quizCreateForm() {
+  get quizCreateForm(): FormGroup {
     return this._quizCreateForm;
   }
 
-  get questionsArray() {
+  get questionsArray(): FormArray {
     return (this._quizCreateForm.get('questions') as FormArray);
   }
 
-  get answersArray()  {
-    return this.questionsArray.get('answers');
+  get title(): FormControl {
+    return this._quizCreateForm.get('title') as FormControl;
   }
 
-  get title() {
-    return this._quizCreateForm.get('title');
-  }
-
-  get quizOnTime() {
+  get quizOnTime(): FormControl {
     return (this._quizCreateForm.get('config') as FormArray).controls['quizOnTime'];
   }
 
-  get numberAnswersNeededToPass() {
+  get numberAnswersNeededToPass(): FormControl {
     return (this._quizCreateForm.get('config') as FormArray).controls['numberAnswersNeededToPass'];
   }
 
-  get quizWithResult() {
+  get quizWithResult(): FormControl {
     return (this._quizCreateForm.get('config') as FormArray).controls['quizWithResult'];
   }
 
-  get timeInSeconds() {
+  get timeInSeconds(): FormControl {
     return (this._quizCreateForm.get('config') as FormArray).controls['timeInSeconds'];
   }
 
@@ -209,7 +205,7 @@ export class QuizCreateUpdateService {
     (this.questionsArray as FormArray).push(this.addQuestionGroup());
   }
 
-  removeQuestion(index: number) {
+  removeQuestion(index: number): void {
     this._amountAnswers -= 1;
     this.questionsArray.removeAt(index);
   }
