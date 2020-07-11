@@ -26,6 +26,7 @@ export class QuizCreateUpdateService {
       this.route.queryParams.subscribe(queryParams => {
         this._quizId ? this.editQuiz() : this._quizCreateForm = this.createNewQuizForm();
       });
+      this.setConditionalValidators();
     }
 
   createNewQuizForm() {
@@ -82,8 +83,8 @@ export class QuizCreateUpdateService {
       this._quizCreateForm = this.formBuilder.group({
         title: new FormControl(quiz.title, [Validators.required]),
         config: this.formBuilder.group({
-          quizWithResult: new FormControl(quiz.config.quizWithResult),
-          quizOnTime: new FormControl(quiz.config.quizOnTime),
+          quizWithResult: new FormControl(quiz.config.quizWithResult.value),
+          quizOnTime: new FormControl(quiz.config.quizOnTime.value),
           numberAnswersNeededToPass: new FormControl(quiz.config.numberAnswersNeededToPass,
             [
               Validators.required,
@@ -94,6 +95,39 @@ export class QuizCreateUpdateService {
         questions: this.formBuilder.array([...quizQuestions])
       });
       this._formIsBuild = true;
+      this.setConditionalValidators();
+    });
+  }
+
+  setConditionalValidators(): void {
+    this.quizWithResult.valueChanges.subscribe(value => {
+      if (value === true) {
+        this.numberAnswersNeededToPass.setValidators(
+          [
+            Validators.required,
+            CustomValidators.numberAnswersNeededToPassValidator(this)
+          ]
+        );
+        this.numberAnswersNeededToPass.updateValueAndValidity();
+      } else {
+        this.numberAnswersNeededToPass.setValidators(null);
+        this.numberAnswersNeededToPass.reset();
+      }
+    });
+
+    this.quizOnTime.valueChanges.subscribe(value => {
+      if (value === true) {
+        this.timeInSeconds.setValidators(
+          [
+            Validators.required,
+            Validators.min(1)
+          ]
+        );
+        this.timeInSeconds.updateValueAndValidity();
+      } else {
+        this.timeInSeconds.setValidators(null);
+        this.timeInSeconds.reset();
+      }
     });
   }
 
@@ -152,18 +186,18 @@ export class QuizCreateUpdateService {
   }
 
   get quizOnTime() {
-    return (this._quizCreateForm.get('config') as FormArray).value;
+    return (this._quizCreateForm.get('config') as FormArray).controls['quizOnTime'];
   }
 
-  get numberAnswersNeededToPass(): AbstractControl {
+  get numberAnswersNeededToPass() {
     return (this._quizCreateForm.get('config') as FormArray).controls['numberAnswersNeededToPass'];
   }
 
   get quizWithResult() {
-    return (this._quizCreateForm.get('config') as FormArray).value;
+    return (this._quizCreateForm.get('config') as FormArray).controls['quizWithResult'];
   }
 
-  get timeInSeconds(): AbstractControl {
+  get timeInSeconds() {
     return (this._quizCreateForm.get('config') as FormArray).controls['timeInSeconds'];
   }
 
