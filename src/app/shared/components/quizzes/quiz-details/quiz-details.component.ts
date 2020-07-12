@@ -88,7 +88,7 @@ export class QuizDetailsComponent implements OnInit, DoCheck {
     this._quizTime = timeValue;
   }
 
-  changeActiveQuestion(buttonType): void {
+  changeActiveQuestion(buttonType: string): void {
     if (this._activeQuestion > 0 && buttonType === ButtonType.Prev) {
       this._activeQuestion -= 1;
     } else if (this._activeQuestion < Object.keys(this._quiz.questions).length - 1 && buttonType === ButtonType.Next) {
