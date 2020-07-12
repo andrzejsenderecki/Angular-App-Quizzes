@@ -9,7 +9,7 @@ export class NavSublistService {
 
   constructor() { }
 
-  setSublistIndex(index: number) {
+  setSublistIndex(index: number): void {
     this._sublistIndex.next(index);
   }
 

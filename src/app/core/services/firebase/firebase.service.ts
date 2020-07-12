@@ -19,7 +19,7 @@ export class FirebaseService {
     private route: ActivatedRoute
   ) { }
 
-  get isUserQuiz() {
+  get isUserQuiz(): boolean {
     return this._isUserQuiz;
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../../core/services/firebase/firebase.service';
 import { AuthenticationService } from '../../../../core/services/account/authentication/authentication.service';
+import { Quiz } from '../../../../core/models/quiz';
 
 @Component({
   selector: 'app-user-quizzes-list',
@@ -29,7 +30,7 @@ export class UserQuizzesListComponent implements OnInit {
     return this._quizzesList;
   }
 
-  get userUid() {
+  get userUid(): string {
     return this._userUid;
   }
 

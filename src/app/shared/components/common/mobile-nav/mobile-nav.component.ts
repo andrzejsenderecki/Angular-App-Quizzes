@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { faHome, faStickyNote, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,18 +6,13 @@ import { faHome, faStickyNote, faUser } from '@fortawesome/free-solid-svg-icons'
   templateUrl: './mobile-nav.component.html',
   styleUrls: ['./mobile-nav.component.scss']
 })
-export class MobileNavComponent implements OnInit {
+export class MobileNavComponent {
 
   hideNav = true;
   sublistIndex: number;
   faHome = faHome;
   faStickyNote = faStickyNote;
   faUser = faUser;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   displayNav(): void {
     this.hideNav = !this.hideNav ? true : false;
@@ -26,5 +21,4 @@ export class MobileNavComponent implements OnInit {
   displaySublist(index: number): void {
     this.sublistIndex = index;
   }
-
 }
