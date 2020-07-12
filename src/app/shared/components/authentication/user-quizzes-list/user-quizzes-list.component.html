@@ -5,7 +5,7 @@
       <p class="user-quizzes-list__quiz-info">{{ quiz.payload.doc.data().title }}</p>
     </div>
     <div class="user-quizzes-list__box">
-      <a [routerLink]="['/dashboard/quiz', quiz.payload.doc.id]" class="user-quizzes-list__button">Wyświetl quiz</a>
+      <a [routerLink]="['/quizzes/quiz', quiz.payload.doc.id]" [queryParams]="{uid: userUid, doc: quiz.payload.doc.id}" class="user-quizzes-list__button">Wyświetl quiz</a>
     </div>
     <div class="user-quizzes-list__box">
       <a [routerLink]="['/dashboard/edit', quiz.payload.doc.id]" class="user-quizzes-list__button">Edytuj</a>

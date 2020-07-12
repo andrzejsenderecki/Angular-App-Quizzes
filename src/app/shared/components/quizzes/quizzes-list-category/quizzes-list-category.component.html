@@ -8,7 +8,8 @@
     <ul class="nav__list">
         <li *ngFor="let quiz of quizzesList" class="nav__item">
           <a [routerLink]="['/quizzes/quiz/', quiz.payload.doc.id]"
-            class="nav__link">
+            class="nav__link"
+            [queryParams]="{collectionName: collectionName}">
             {{ quiz.payload.doc.data().title }}
           </a>
         </li>
