@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { QuizCreateUpdateService } from 'src/app/core/services/quizzes/quiz-create-update.service';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,43 +9,37 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./quiz-create-form.component.scss'],
   providers: [QuizCreateUpdateService]
 })
-export class QuizCreateFormComponent implements OnInit {
+export class QuizCreateFormComponent {
 
   faCheck = faCheck;
 
   constructor(private quizCreateUpdateService: QuizCreateUpdateService) { }
 
-  ngOnInit() { }
-
-  get quizCreateForm() {
+  get quizCreateForm(): FormGroup {
     return this.quizCreateUpdateService.quizCreateForm;
   }
 
-  get questionsArray() {
+  get questionsArray(): FormArray {
     return this.quizCreateUpdateService.questionsArray;
   }
 
-  get answersArray() {
-    return this.quizCreateUpdateService.answersArray;
-  }
-
-  get title() {
+  get title(): FormControl {
     return this.quizCreateUpdateService.title;
   }
 
-  get quizOnTime() {
+  get quizOnTime(): FormControl {
     return this.quizCreateUpdateService.quizOnTime;
   }
 
-  get numberAnswersNeededToPass() {
+  get numberAnswersNeededToPass(): FormControl  {
     return this.quizCreateUpdateService.numberAnswersNeededToPass;
   }
 
-  get quizWithResult() {
+  get quizWithResult(): FormControl {
     return this.quizCreateUpdateService.quizWithResult;
   }
 
-  get timeInSeconds() {
+  get timeInSeconds(): FormControl {
     return this.quizCreateUpdateService.timeInSeconds;
   }
 

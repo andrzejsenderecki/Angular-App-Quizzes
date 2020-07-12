@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../../core/services/firebase/firebase.service';
 import { AuthenticationService } from '../../../../core/services/account/authentication/authentication.service';
+import { Quiz } from '../../../../core/models/quiz';
 
 @Component({
   selector: 'app-user-quizzes-list',
@@ -10,6 +11,7 @@ import { AuthenticationService } from '../../../../core/services/account/authent
 export class UserQuizzesListComponent implements OnInit {
 
   private _quizzesList;
+  private _userUid: string;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -17,9 +19,9 @@ export class UserQuizzesListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const loggedUser = this.authenticationService.user;
+    this._userUid = this.authenticationService.user.uid;
 
-    this.firebaseService.getQuizzesByUserUid(loggedUser.uid).subscribe(quizzes => {
+    this.firebaseService.getQuizzesByUserUid(this._userUid).subscribe(quizzes => {
       this._quizzesList = quizzes;
     });
   }
@@ -28,8 +30,11 @@ export class UserQuizzesListComponent implements OnInit {
     return this._quizzesList;
   }
 
+  get userUid(): string {
+    return this._userUid;
+  }
+
   removeQuiz(quizId: string) {
-    const loggedUser = this.authenticationService.user;
-    this.firebaseService.removeUserQuizById(loggedUser.uid, quizId);
+    this.firebaseService.removeUserQuizById(this._userUid, quizId);
   }
 }

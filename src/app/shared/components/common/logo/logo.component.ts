@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,14 +6,8 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './logo.component.html',
   styleUrls: ['./logo.component.scss']
 })
-export class LogoComponent implements OnInit {
+export class LogoComponent {
 
   faCheck = faCheck;
   @Input() type: string;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

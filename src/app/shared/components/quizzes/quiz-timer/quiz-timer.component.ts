@@ -14,8 +14,6 @@ export class QuizTimerComponent implements OnInit, OnDestroy {
   @Output()
   public timeValueChange = new EventEmitter();
 
-  constructor() { }
-
   ngOnInit() {
     this._intervalId = window.setInterval(() => {
       this.quizTime --;

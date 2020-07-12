@@ -14,8 +14,6 @@ export class QuestionFormComponent implements OnInit {
   @Input() activeQuestion: number;
   @Output() selectedAnswer = new EventEmitter();
 
-  constructor() { }
-
   ngOnInit(): void {
     if (this.answers.length) {
       this.checkedAnswer = this.answers[this.activeQuestion].answer;

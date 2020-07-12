@@ -29,7 +29,7 @@
           <p class="form__label form__label--with-margin">Ankieta</p>
         </label>
       </div>
-      <div *ngIf="quizWithResult.quizWithResult" class="form__input-box form__input-box--content-center form__input-box--with-margin">
+      <div *ngIf="quizWithResult.value" class="form__input-box form__input-box--content-center form__input-box--with-margin">
         <label class="form__label" for="numberAnswersNeededToPass">Ilość poprawnych odpowiedzi potrzebna do zaliczenia testu:</label>
         <div class="relative-box">
           <input class="form__input form__input--width-auto" type="number" min="1" id="numberAnswersNeededToPass" formControlName="numberAnswersNeededToPass">
@@ -54,7 +54,7 @@
           <p class="form__label form__label--with-margin">Quiz bez limitu czasu</p>
         </label>
       </div>
-      <div *ngIf="quizOnTime.quizOnTime" class="form__input-box form__input-box--content-center">
+      <div *ngIf="quizOnTime.value" class="form__input-box form__input-box--content-center">
         <label class="form__label" for="timeInSeconds">Czas testu w sekundach:</label>
         <div class="relative-box">
           <input class="form__input form__input--width-auto" type="number" min="1" id="timeInSeconds" formControlName="timeInSeconds">
@@ -98,14 +98,14 @@
                 </div>
                 <i class="fas fa-check"></i>
                 <label class="form__col-30 form__input-radio-box">
-                  <input class="form__input-radio" *ngIf="answer.value === correctAnswer[i]; else input_no_checked" type="radio" [disabled]="!quizWithResult.quizWithResult" [checked]="quizWithResult.quizWithResult" (input)="setCorrectAnswer(j, i)" name='{{ i }}' >
+                  <input class="form__input-radio" *ngIf="answer.value === correctAnswer[i]; else input_no_checked" type="radio" [disabled]="!quizWithResult.value" [checked]="quizWithResult.value" (input)="setCorrectAnswer(j, i)" name='{{ i }}' >
                   <ng-template #input_no_checked>
-                    <input class="form__input-radio" type="radio" [disabled]="!quizWithResult.quizWithResult" (input)="setCorrectAnswer(j, i)" name='{{ i }}'>
+                    <input class="form__input-radio" type="radio" [disabled]="!quizWithResult.value" (input)="setCorrectAnswer(j, i)" name='{{ i }}'>
                   </ng-template>
-                  <span class="form__checkmark" [ngClass]="{'form__checkmark--input-disabled': !quizWithResult.quizWithResult}">
+                  <span class="form__checkmark" [ngClass]="{'form__checkmark--input-disabled': !quizWithResult.value}">
                     <fa-icon [icon]="faCheck" class="form__check-icon"></fa-icon>
                   </span>
-                  <p class="form__label form__label--with-margin" [ngClass]="{'form__label--input-disabled': !quizWithResult.quizWithResult}">Poprawna odpowiedź</p>
+                  <p class="form__label form__label--with-margin" [ngClass]="{'form__label--input-disabled': !quizWithResult.value}">Poprawna odpowiedź</p>
                 </label>
                 <div class="form__col-20">
                   <button class="form__button" type="button" (click)="removeAnswer(i, j)">Usuń odpowiedź</button>

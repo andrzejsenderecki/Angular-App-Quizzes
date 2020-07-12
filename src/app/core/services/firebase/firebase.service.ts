@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import { AuthenticationService } from '../account/authentication/authentication.service';
 import { Quiz } from '../../models/quiz';
 import { QuizResult } from '../../models/quiz-result';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,10 @@ export class FirebaseService {
     private angularFirestore: AngularFirestore,
     private authenticationService: AuthenticationService,
     private router: Router,
-  ) {}
+    private route: ActivatedRoute
+  ) { }
 
-  get isUserQuiz() {
+  get isUserQuiz(): boolean {
     return this._isUserQuiz;
   }
 
@@ -30,9 +31,16 @@ export class FirebaseService {
     return this.angularFirestore.collection('users').doc(userUid).collection('quizzes').snapshotChanges();
   }
 
-  getQuizById(collectionName: string, id: string) {
+  getQuizById(collectionName?: string, id?: string) {
     this._isUserQuiz = false;
-    return this.angularFirestore.doc<Quiz>(`${collectionName}/${id}`).valueChanges();
+    const uid = this.route.snapshot.queryParams.uid;
+    const doc = this.route.snapshot.queryParams.doc;
+
+    if (collectionName) {
+      return this.angularFirestore.doc<Quiz>(`${collectionName}/${id}`).valueChanges();
+    } else {
+      return this.angularFirestore.collection('users').doc(uid).collection('quizzes').doc<Quiz>(doc).valueChanges();
+    }
   }
 
   getUserQuizByid(userUid: string, quizId: string): any {

@@ -26,9 +26,10 @@ export class QuizCreateUpdateService {
       this.route.queryParams.subscribe(queryParams => {
         this._quizId ? this.editQuiz() : this._quizCreateForm = this.createNewQuizForm();
       });
+      this.setConditionalValidators();
     }
 
-  createNewQuizForm() {
+  createNewQuizForm(): FormGroup {
     return this.formBuilder.group({
       title: new FormControl(null, [Validators.required]),
       config: this.formBuilder.group({
@@ -45,7 +46,7 @@ export class QuizCreateUpdateService {
     });
   }
 
-  editQuiz() {
+  editQuiz(): void {
     this.route.params.subscribe(params => {
       this._quizId = params.id;
     });
@@ -82,8 +83,8 @@ export class QuizCreateUpdateService {
       this._quizCreateForm = this.formBuilder.group({
         title: new FormControl(quiz.title, [Validators.required]),
         config: this.formBuilder.group({
-          quizWithResult: new FormControl(quiz.config.quizWithResult),
-          quizOnTime: new FormControl(quiz.config.quizOnTime),
+          quizWithResult: new FormControl(quiz.config.quizWithResult.value),
+          quizOnTime: new FormControl(quiz.config.quizOnTime.value),
           numberAnswersNeededToPass: new FormControl(quiz.config.numberAnswersNeededToPass,
             [
               Validators.required,
@@ -94,6 +95,39 @@ export class QuizCreateUpdateService {
         questions: this.formBuilder.array([...quizQuestions])
       });
       this._formIsBuild = true;
+      this.setConditionalValidators();
+    });
+  }
+
+  setConditionalValidators(): void {
+    this.quizWithResult.valueChanges.subscribe(value => {
+      if (value === true) {
+        this.numberAnswersNeededToPass.setValidators(
+          [
+            Validators.required,
+            CustomValidators.numberAnswersNeededToPassValidator(this)
+          ]
+        );
+        this.numberAnswersNeededToPass.updateValueAndValidity();
+      } else {
+        this.numberAnswersNeededToPass.setValidators(null);
+        this.numberAnswersNeededToPass.reset();
+      }
+    });
+
+    this.quizOnTime.valueChanges.subscribe(value => {
+      if (value === true) {
+        this.timeInSeconds.setValidators(
+          [
+            Validators.required,
+            Validators.min(1)
+          ]
+        );
+        this.timeInSeconds.updateValueAndValidity();
+      } else {
+        this.timeInSeconds.setValidators(null);
+        this.timeInSeconds.reset();
+      }
     });
   }
 
@@ -119,7 +153,7 @@ export class QuizCreateUpdateService {
     });
   }
 
-  get amountAnswers() {
+  get amountAnswers(): number {
     return this._amountAnswers;
   }
 
@@ -127,43 +161,39 @@ export class QuizCreateUpdateService {
     this._amountAnswers = value;
   }
 
-  get correctAnswer() {
+  get correctAnswer(): Array<string> {
     return this._correctAnswer;
   }
 
-  get formIsBuild() {
+  get formIsBuild(): boolean {
     return this._formIsBuild;
   }
 
-  get quizCreateForm() {
+  get quizCreateForm(): FormGroup {
     return this._quizCreateForm;
   }
 
-  get questionsArray() {
+  get questionsArray(): FormArray {
     return (this._quizCreateForm.get('questions') as FormArray);
   }
 
-  get answersArray()  {
-    return this.questionsArray.get('answers');
+  get title(): FormControl {
+    return this._quizCreateForm.get('title') as FormControl;
   }
 
-  get title() {
-    return this._quizCreateForm.get('title');
+  get quizOnTime(): FormControl {
+    return (this._quizCreateForm.get('config') as FormArray).controls['quizOnTime'];
   }
 
-  get quizOnTime() {
-    return (this._quizCreateForm.get('config') as FormArray).value;
-  }
-
-  get numberAnswersNeededToPass(): AbstractControl {
+  get numberAnswersNeededToPass(): FormControl {
     return (this._quizCreateForm.get('config') as FormArray).controls['numberAnswersNeededToPass'];
   }
 
-  get quizWithResult() {
-    return (this._quizCreateForm.get('config') as FormArray).value;
+  get quizWithResult(): FormControl {
+    return (this._quizCreateForm.get('config') as FormArray).controls['quizWithResult'];
   }
 
-  get timeInSeconds(): AbstractControl {
+  get timeInSeconds(): FormControl {
     return (this._quizCreateForm.get('config') as FormArray).controls['timeInSeconds'];
   }
 
@@ -175,7 +205,7 @@ export class QuizCreateUpdateService {
     (this.questionsArray as FormArray).push(this.addQuestionGroup());
   }
 
-  removeQuestion(index: number) {
+  removeQuestion(index: number): void {
     this._amountAnswers -= 1;
     this.questionsArray.removeAt(index);
   }

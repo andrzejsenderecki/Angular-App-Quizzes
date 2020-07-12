@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 import { FirebaseService } from '../../firebase/firebase.service';
 import { first } from 'rxjs/operators';
@@ -21,11 +22,13 @@ export class QuizService {
 
   constructor(
     private firebaseService: FirebaseService,
-    private angularFireAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    private route: ActivatedRoute
   ) {
     this.angularFireAuth.authState.subscribe(user => {
       this._loggedUser = user;
     });
+    this._firebaseCollectionName = this.route.snapshot.queryParamMap.get('collectionName');
   }
 
   initAnswers(quizId: string, quiz: Quiz): void {

@@ -20,11 +20,11 @@ export class AuthenticationService {
     });
   }
 
-  get user() {
+  get user(): User {
     return this._user;
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): void {
     this.angularFireAuth.signInWithEmailAndPassword(email, password).then(user => {
       this.router.navigate(['/dashboard/list']);
     })
@@ -33,7 +33,7 @@ export class AuthenticationService {
     });
   }
 
-  register(email: string, password: string) {
+  register(email: string, password: string): void {
     this.angularFireAuth.createUserWithEmailAndPassword(email, password).then(user => {
       this.angularFirestore.collection('users').doc(user.user.uid).set({userId: user.user.uid});
     })
@@ -42,7 +42,7 @@ export class AuthenticationService {
     });
   }
 
-  logout() {
+  logout(): void {
     this.angularFireAuth.signOut();
   }
 }
